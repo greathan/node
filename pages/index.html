@@ -1,0 +1,24 @@
+<!Doctype>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+    
+      var param = {
+      	client_id: "356648114112.apps.googleusercontent.com",
+        scope: "https://www.googleapis.com/auth/latitude.all.best",
+        redirect_uri: "http://greathan.cn:88/latitude.html",
+        response_type: "token"
+      };
+      
+      var AUTH_URL = 'https://accounts.google.com/o/oauth2/auth?';
+      
+      function outh() {
+      	window.open(AUTH_URL + $.param(param));
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="Auth" onclick="outh()" />
+  </body>
+</html>

@@ -1,0 +1,9 @@
+
+.search-control {
+	padding: 5px;
+	margin-top: 10px;
+	background: rgba(0,0,0, 0.6);
+	color: white;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #333;
+}

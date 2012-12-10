@@ -1,0 +1,29 @@
+<html>
+  <head>
+  	<link rel="stylesheet" type="text/css" href="/styles/latitude.css" />
+  </head>
+  <body>
+  <div id="map" style="width:1000px; height: 600px;float:left;"></div>
+  <div id="list" style="margin-left:10px"></div>
+
+  <textarea id="tpl" style="display:none">
+  	<div>
+	<form>
+		From: <input type="text" style="width:100px" id="from" /> 
+		To: <input style="width:100px" type="text" id="to" /> <br />
+		Max-Result: <input type="text" value="100" name="max-results" />
+		<input type="submit" value="submit" />
+
+		<input type="hidden" value="" name="access_token" />
+		<input type="hidden" value="AIzaSyDyChzBw2v3uVsxNwu_EcvPHXMluYsK79w" name="key" />
+		<input type="hidden" value="best" name="granularity" />
+		<input type="hidden" value="" name="max-time" />
+		<input type="hidden" value="" name="min-time" />
+	</form>
+	</div>
+  </textarea>
+  </body>
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=zh_CN&libraries=visualization"></script>
+   <script type="text/javascript" src="/scripts/latitude.js"></script>
+</html>
