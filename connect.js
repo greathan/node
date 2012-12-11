@@ -55,7 +55,6 @@ var  app = connect()
 			r.on('data', function(chunk) {
 
 				var arr = chunk.toString().split('<tr>');
-				console.log(arr);
 				var reg = /<td style="color:Black;">(\d{1,2}).+\s(\d{2}:\d{2})<\/td><td>([\.\d]+)<\/td><td>([\.\d]+)<\/td><td>([\.\d]+)<\/td>/;
 				var result  = [];
 				for (var i = 0, l = arr.length; i < l; i++) {
@@ -84,7 +83,8 @@ var  app = connect()
 				};
 
 				res.setHeader('Content-Type', 'application/json');
-				res.write((param.callback || '') + '(' +JSON.stringify(data) + ')');
+				var jsonString = JSON.stringify(data);
+				res.write(param.callback ? (param.callback + '(' + jsonString + ')') : jsonString);
 				res.end();
 			});
 		}).end();
