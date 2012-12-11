@@ -1,0 +1,18 @@
+{
+	"name": "Node samples",
+	"version": "0.1",
+	"author": "Great Han<hwlyglove@gmail.com>",
+	"description": "Node samples",
+	"contributors":[{
+		"name": "Great Han",
+		"email": "hwlyglove@gmail.com"
+	}],
+	"scripts": { "start": "node connect.js" },
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/greathan/node.git"
+	},
+	"dependencies": {
+		"connect": "2.x.x"
+	}
+}
