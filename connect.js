@@ -65,7 +65,7 @@ var  app = connect()
 
 				var list = [];
 				result.forEach(function(item) {
-					list.push({
+					item[0] == new Date().getDate() && list.push({
 						day: item[0],
 						time: item[1],
 						SO2: item[2],
