@@ -1,5 +1,6 @@
 {
 	"name": "node-samples",
+	"main": "connect.js"
 	"version": "0.1.0",
 	"author": "Great Han<hwlyglove@gmail.com>",
 	"description": "Node samples",
