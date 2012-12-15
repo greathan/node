@@ -1,14 +1,17 @@
 var connect = require('connect'),
+	net = require('net'),
+	os = require('os'),
 	http = require('http'),
 	https = require('https'),
 	url = require('url'),
 	fs = require('fs');
 
+var air = require('./lib/air');
+
 var config = require('./config');
 
-var port = config.PORT;
+var port = config.port;
 
-console.log('the server is running at ' + http.globalAgent.domain + ':' + port);
 var  app = connect()
 	.use(connect.logger('dev'))
 	.use(connect.static(__dirname + '/pages'))
@@ -40,54 +43,11 @@ var  app = connect()
 
 		https.request(options, callback).end();
 	})
-	.use('/air', function(req, res) {
-
-		var param = url.parse(req.url, true).query;
+	.use('/air', function(req, res) {		
 
 		var addr = 'http://zx.bjmemc.com.cn/pm25/Charts/CreateTableV.aspx?place=wl';
+		air.init(req, res);
 
-		http.request({
-			host: "zx.bjmemc.com.cn",
-			path: "/pm25/Charts/CreateTableV.aspx?place=wl",
-			port: "80",
-			method: "GET"
-		}, function(r) {
-			r.on('data', function(chunk) {
-
-				var arr = chunk.toString().split('<tr>');
-				var reg = /<td style="color:Black;">(\d{1,2}).+\s(\d{2}:\d{2})<\/td><td>([\.\d]+)<\/td><td>([\.\d]+)<\/td><td>([\.\d]+)<\/td>/;
-				var result  = [];
-				for (var i = 0, l = arr.length; i < l; i++) {
-					var item = arr[i].match(reg);
-					item && item.shift() && result.push(item);
-					
-				}
-
-				var list = [];
-				result.forEach(function(item) {
-					item[0] == new Date().getDate() && list.push({
-						day: item[0],
-						time: item[1],
-						SO2: item[2],
-						NO2: item[3],
-						PM25: item[4]
-					});
-				});
-
-				var data = {
-					apiVersion: "1.0",
-					data: {
-						"position": "39.9768,116.2990",
-						"items": list
-					}
-				};
-
-				res.setHeader('Content-Type', 'application/json');
-				var jsonString = JSON.stringify(data);
-				res.write(param.callback ? (param.callback + '(' + jsonString + ')') : jsonString);
-				res.end();
-			});
-		}).end();
 
 	})
 	//.use(connect.directory(__dirname))
@@ -110,4 +70,6 @@ var  app = connect()
 	// 	})
 	// 	//res.end(req.url + '\n');
 	// })
-	.listen(port);
+	.listen(port, function() {
+		console.log('the server is running at \033[01;35m' + os.hostname() + ':' + port);
+	});
